@@ -1,5 +1,7 @@
 package com.koreaIT.BAM;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,26 +9,59 @@ public class Main {
 		System.out.println("== 프로그램 시작 ==");
 		Scanner sc = new Scanner(System.in);
 		
+		List<Article> articles = new ArrayList<>();
+		
+		int cnt  = 0;
+		
 		while(true) {
-			String cmd = sc.nextLine();	
-			String title = sc.nextLine();	
-			String contents = sc.nextLine();	
-			int cnt  = 0;
 			
-		
-			System.out.println("명령어 : " + cmd);
-		
-			if(cmd.equals("list")) {
-				System.out.println("게시글이 없습니다.");
+			System.out.printf("명령어) ");
+	
+			String cmd = sc.nextLine().trim();	
+			
+			if(cmd.length() == 0) {
+				System.out.println("명령어를 입력해주세요");
+				continue;
 			}
-			else if(cmd.equals("write")) {
-				System.out.println("제목 : " + title);
-				System.out.println("내용 : " + contents);
-				cnt++;
-				System.out.println(cnt + "글입니다.");
-			}
-			else if(cmd.equals("exit")) {
+			
+			if(cmd.equals("exit")) {
 				break;
+			}
+		
+			if(cmd.equals("article list")) {
+				
+				if(articles.size() == 0) {
+					System.out.println("게시글이 없습니다.");
+					continue;
+				}
+				
+				System.out.println("article write");
+				System.out.println("번호	:	제목");
+				
+				for(int i = articles.size() - 1; i >= 0 ; i-- ) {
+					Article article = articles.get(i);
+					System.out.printf("%d	: 	%s \n"  , article.id, article.title);
+
+				}
+				
+				
+			} 
+			 
+			else if (cmd.equals("test")) {
+				
+			
+			}
+			else if(cmd.equals("article write")) {
+				cnt++;
+				System.out.printf("제목 : ");
+				String title = sc.nextLine();	
+				System.out.printf("내용 : ");
+				String contents = sc.nextLine();	
+			
+				Article article = new Article(title, contents, cnt);
+				articles.add(article);
+				
+				System.out.println(cnt + "번 글이 생성되었습니다.");
 			}
 			else {
 				System.out.println("존재하지 않는 명령어 입니다.");
@@ -40,4 +75,19 @@ public class Main {
 		
 	}
 
+}
+class Article {
+	String title;
+	String contents;
+	int id;
+	
+	Article(String title, String contents, int cnt) {
+		this.title = title;
+		this.contents = contents;
+		this.id = cnt;
+		
+		
+	}
+	
+	
 }
