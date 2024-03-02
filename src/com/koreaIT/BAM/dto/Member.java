@@ -8,8 +8,8 @@ public class Member {
 	public String loginPw;
 	public String loginName;
 	
-	public Member(int cnt, String regData, String loginId, String loginPw, String loginName) {
-		this.id = cnt;
+	public Member(int id, String regData, String loginId, String loginPw, String loginName) {
+		this.id = id;
 		this.regData = regData;
 		this.loginId = loginId;
 		this.loginPw = loginPw;
